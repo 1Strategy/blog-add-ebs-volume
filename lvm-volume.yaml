@@ -1,0 +1,50 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: >
+  EC2 instance with additional EBS volume set up as an LVM volume.
+
+Parameters:
+  VpcIdParameter:
+    Description: Launch EC2 instance in this VPC
+    Type: AWS::EC2::VPC::Id
+  InstanceSubnetIdParameter:
+    Description: Launch EC2 instance in this subnet
+    Type: AWS::EC2::Subnet::Id
+  SshKeyParameter:
+    Description: SSH Keypair to login to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+  InstanceAMIParameter:
+    Description: Launch EC2 instance from this AMI
+    Type: AWS::EC2::Image::Id
+    Default: ami-8ca83fec
+  InstanceTypeParameter:
+    Description: Confluence EC2 instance family/size, e.g. t2.large
+    Type: String
+    Default: t2.micro
+
+Resources:
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH from the Internet.
+      VpcId: !Ref VpcIdParameter
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '22'
+        ToPort: '22'
+        CidrIp: 0.0.0.0/0
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+        BlockDeviceMappings:
+        # Create a separate volume
+        - DeviceName: /dev/sdf
+          Ebs:
+            DeleteOnTermination: false
+            VolumeSize: 10
+        ImageId: !Ref InstanceAMIParameter
+        InstanceType: !Ref InstanceTypeParameter
+        KeyName: !Ref SshKeyParameter
+        SecurityGroupIds:
+          - !Ref InstanceSecurityGroup
+        SubnetId: !Ref InstanceSubnetIdParameter
