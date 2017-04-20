@@ -10,8 +10,16 @@ to a Linux mount point, like `/var/myapp`.
 In this article I'll show you how to add an EBS volume to an EC2 instance and
 automatically mount the EBS volume to a directory/mount point inside the instance.
 
+# Deploying the CloudFormation template
+
 The example CloudFormation template we'll be using is at
 [1Strategy/blog-add-ebs-volume](https://github.com/1Strategy/blog-add-ebs-volume).
+
+If you'd like to try it out, clone this git repo and run this AWS CLI command to deploy it:
+
+```
+aws cloudformation deploy --template-file ./lvm-volume.yaml --stack-name lvm-volume --parameter-overrides VpcIdParameter=vpc-abcd1234 InstanceSubnetIdParameter=subnet-abcd1234 SshKeyParameter=mysshkey
+```
 
 # How to add an EBS volume in CloudFormation
 
