@@ -122,6 +122,12 @@ Metadata section above. This is the recommended pattern for running bootstrap co
 your Linux instance. See [AWS::CloudFormation::Init](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-init.html)
 for more details.
 
+#### Note
+If you are installing an application package which will create directories under
+your `/var/myapp` mount point, be sure to run the commands to create the mount
+point before installing your package. Otherwise the sub-directories the package
+creates will be wiped out.
+
 # Results
 
 After running the complete CloudFormation template you will have the `/var/myapp`
@@ -161,9 +167,3 @@ and how to auto-mount the file system at boot by adding a line to your `/etc/fst
 file.
 
 I hope this helps you improve your CloudFormation templates when dealing with EBS volumes for applications.
-
-#### Note
-If you are installing an application package which will create directories under
-your `/var/myapp` mount point, be sure to run the commands to create the mount
-point before installing your package. Otherwise the sub-directories the package
-creates will be wiped out.
