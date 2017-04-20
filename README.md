@@ -15,7 +15,7 @@ automatically mount the EBS volume to a directory/mount point inside the instanc
 The example CloudFormation template we'll be using is at
 [1Strategy/blog-add-ebs-volume](https://github.com/1Strategy/blog-add-ebs-volume).
 
-If you'd like to try it out, clone this git repo and run this AWS CLI command to deploy it:
+If you'd like to try it out, clone the git repo and run this AWS CLI command to deploy it:
 
 ```
 aws cloudformation deploy --template-file ./lvm-volume.yaml --stack-name lvm-volume --parameter-overrides VpcIdParameter=vpc-abcd1234 InstanceSubnetIdParameter=subnet-abcd1234 SshKeyParameter=mysshkey
