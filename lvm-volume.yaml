@@ -32,7 +32,7 @@ Parameters:
     Type: AWS::EC2::Image::Id
     Default: ami-8ca83fec
   InstanceTypeParameter:
-    Description: Confluence EC2 instance family/size, e.g. t2.large
+    Description: EC2 instance family/size, e.g. t2.large
     Type: String
     Default: t2.micro
 
