@@ -3,7 +3,7 @@
 
 Creating a separate EBS volume can be very useful to prevent application data loss in the event your EC2 instance is unexpectedly terminated. It also makes it very easy to back up your application data by snapshotting the EBS volume.
 
-AWS makes it easy in CloudFormation templates to add additional EBS volumes to an EC2 Instance,
+AWS makes it easy to add additional EBS volumes to an EC2 Instance in CloudFormation templates,
 but it's not obvious from the AWS CloudFormation docs how to map an EBS volume
 to a Linux mount point, like `/var/myapp`.
 
@@ -56,7 +56,7 @@ you create a file system on it and mount it to a directory, or mount point, e.g.
 
 # How to mount a volume in Linux automatically
 
-You can of course SSH in to your instance after creation and run the commands to
+You can, of course, SSH in to your instance after creation and run the commands to
 create and mount a file system by hand, but if you are already using CloudFormation
 you want it all automated. In my case, I wanted to mount the EBS volume under
 `/var/myapp` so my application could store its data on a separate volume which
@@ -166,9 +166,9 @@ in the event your EC2 instance is unexpectedly terminated. It also makes it very
 easy to back up your application data by snapshotting the EBS volume. Finally,
 it cleanly separates your application data from your OS root volume.
 
-In this post, I showed you how to create an EC2 Instance via a AWS CloudFormation
-template with an EBS volume to store your application data separate from your EC2
-instance's root volume.
+In this post, I showed you, via a AWS CloudFormation template, how to create an
+EC2 Instance with an EBS volume to store your application data separately from your
+EC2 instance's root volume.
 
 You also learned how to create an LVM volume and ext4 filesystem on your EBS volume,
 and how to auto-mount the file system at boot by adding a line to your `/etc/fstab`
